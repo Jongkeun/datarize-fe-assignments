@@ -1,9 +1,9 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query'
 import { fetchCustomers } from '../api'
-import { Customer } from '../types'
+import { Customer, SORT_TYPE } from '../types'
 
 export const useCustomers = (
-  filter: { sortBy?: 'asc' | 'desc' | null; nameSearch?: string | null },
+  filter: { sortBy?: SORT_TYPE; nameSearch?: string | null },
   options?: Omit<UseQueryOptions<Customer[], Error>, 'queryKey' | 'queryFn'>,
 ) => {
   return useQuery({

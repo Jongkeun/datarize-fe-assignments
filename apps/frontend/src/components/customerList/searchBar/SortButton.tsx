@@ -1,7 +1,8 @@
 import { ArrowUpDown } from 'lucide-react'
+import { SORT_TYPE } from '../../../types'
 
 type Props = {
-  sortBy: 'asc' | 'desc' | null
+  sortBy: SORT_TYPE
   toggleSort: () => void
 }
 

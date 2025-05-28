@@ -28,7 +28,4 @@ export interface DateRangeFilter {
   to?: string | null
 }
 
-// export interface CustomerListFilter {
-//   sortBy: 'asc' | 'desc' | null
-//   nameSearch: string | null
-// }
+export type SORT_TYPE = 'asc' | 'desc' | null

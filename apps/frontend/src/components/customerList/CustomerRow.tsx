@@ -24,6 +24,7 @@ export const CustomerRow = ({ customer }: Props) => {
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{customerPurchases?.length}</td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{totalPrice?.toLocaleString()} 원</td>
       </tr>
+      {/* tbody 안에 있어서 나중에 portal로 빼면 좋을듯 */}
       {selectedCustomerId === customer.id.toString() && (
         <CustomerDetailModal
           onClose={() => setSelectedCustomerId(null)}

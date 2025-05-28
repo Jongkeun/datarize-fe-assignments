@@ -7,7 +7,7 @@ const CHART_MARGIN = { top: 20, right: 30, left: 20, bottom: 60 }
 const BAR_SIZE = 40
 const ANIMATION_DURATION = 1000
 
-export const PriceRangeChart = () => {
+export const PriceRangeFrequencyChart = () => {
   const { dateRange } = useDashboardStore()
   const { data: purchaseFrequencyData, isLoading, error } = usePurchaseFrequency(dateRange)
 

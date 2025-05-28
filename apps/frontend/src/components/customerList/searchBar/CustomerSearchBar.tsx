@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useCustomers } from '../../../hooks/useCustomers'
 import { useDebounce } from '../../../hooks/utils/useDebounce'
+import { SORT_TYPE } from '../../../types'
 import { SearchInput } from './SearchInput'
 import { SortButton } from './SortButton'
 
 export const CustomerSearchBar = () => {
-  const [sortBy, setSortBy] = useState<'asc' | 'desc' | null>(null)
+  const [sortBy, setSortBy] = useState<SORT_TYPE>(null)
   const [searchInput, setSearchInput] = useState('')
   const debouncedSearch = useDebounce(searchInput, 500)
   const { refetch } = useCustomers({ sortBy, nameSearch: debouncedSearch })
@@ -15,7 +16,16 @@ export const CustomerSearchBar = () => {
   }, [debouncedSearch, sortBy])
 
   const toggleSort = () => {
-    const newSortBy = sortBy === 'asc' ? 'desc' : sortBy === 'desc' ? null : 'asc'
+    let newSortBy: SORT_TYPE = null
+
+    if (sortBy === 'asc') {
+      newSortBy = 'desc'
+    } else if (sortBy === 'desc') {
+      newSortBy = null
+    } else {
+      newSortBy = 'asc'
+    }
+
     setSortBy(newSortBy)
   }
 
