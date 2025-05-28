@@ -1,24 +1,22 @@
-import { useCustomerPurchases } from '../hooks/useCustomerPurchases'
-import { Customer } from '../types'
-import { CustomerDetail } from './CustomerDetail'
-import { useDashboardStore } from '../store/dashboardStore'
+import { useCustomerPurchases } from '../../hooks/useCustomerPurchases'
+import { Customer } from '../../types'
+import { CustomerDetailModal } from '../customerDetail/CustomerDetailModal'
+import { useState } from 'react'
 
 type Props = {
   customer: Customer
-  onClick: (id: string) => void
-  isSelected: boolean
 }
-export const CustomerRow = ({ customer, onClick, isSelected }: Props) => {
-  const { selectedCustomerId, setSelectedCustomerId } = useDashboardStore()
+export const CustomerRow = ({ customer }: Props) => {
+  const [selectedCustomerId, setSelectedCustomerId] = useState<string | null>(null)
   const { data: customerPurchases } = useCustomerPurchases(customer.id.toString())
   const totalPrice = customerPurchases?.reduce((acc, purchase) => acc + purchase.price, 0)
+  const isSelected = selectedCustomerId === customer.id.toString()
 
-  console.log(customerPurchases)
   return (
     <>
       <tr
         key={customer.id}
-        onClick={() => onClick(customer.id.toString())}
+        onClick={() => setSelectedCustomerId(customer.id.toString())}
         className={`cursor-pointer transition-colors hover:bg-blue-50 ${isSelected ? 'bg-blue-50' : ''}`}
       >
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{customer.id}</td>
@@ -27,7 +25,7 @@ export const CustomerRow = ({ customer, onClick, isSelected }: Props) => {
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{totalPrice?.toLocaleString()} 원</td>
       </tr>
       {selectedCustomerId === customer.id.toString() && (
-        <CustomerDetail
+        <CustomerDetailModal
           onClose={() => setSelectedCustomerId(null)}
           customer={customer}
           purchases={customerPurchases || []}

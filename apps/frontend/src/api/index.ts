@@ -3,9 +3,6 @@ import { Customer, Purchase, DateRangeFilter, PurchaseFrequencyData } from '../t
 
 const API_BASE_URL = 'http://localhost:4000/api'
 
-/**
- * Fetches purchase frequency data based on the given date range
- */
 export const fetchPurchaseFrequency = async (dateRange?: DateRangeFilter): Promise<PurchaseFrequencyData[]> => {
   let url = `${API_BASE_URL}/purchase-frequency`
 
@@ -26,9 +23,6 @@ export const fetchPurchaseFrequency = async (dateRange?: DateRangeFilter): Promi
   return response.json()
 }
 
-/**
- * Fetches customer list with optional sorting and name search
- */
 export const fetchCustomers = async (sortBy?: 'asc' | 'desc' | null, name?: string | null): Promise<Customer[]> => {
   let url = `${API_BASE_URL}/customers`
 
@@ -49,9 +43,6 @@ export const fetchCustomers = async (sortBy?: 'asc' | 'desc' | null, name?: stri
   return response.json()
 }
 
-/**
- * Fetches a specific customer's purchase history
- */
 export const fetchCustomerPurchases = async (customerId: string): Promise<Purchase[]> => {
   const url = `${API_BASE_URL}/customers/${customerId}/purchases`
 
